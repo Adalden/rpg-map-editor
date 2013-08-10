@@ -12,19 +12,26 @@
 
 <div id="sideBar">
   <tabset>
+    <tab heading="Tiles">
+      <div
+        class="tile"
+        ng-class="{selected:num==curTileChoice}"
+        ng-click="$parent.curTileChoice=num"
+        style="{{getStyle(num)}}"
+        ng-repeat="num in getNumber(tileTotal)"></div>
+    </tab>
+    <tab heading="Events"></tab>
     <tab heading="Properties">
       <label>Width:</label>
       <input type="text" ng-model="mapWidth">
       <label>Height:</label>
       <input type="text" ng-model="mapHeight">
     </tab>
-    <tab heading="Events"></tab>
-    <tab heading="Tiles"></tab>
   </tabset>
 </div>
 
 <div id="mapContainer">
-  <canvas width="{{mapWidth}}" height="{{mapHeight}}" id="map"></canvas>
+  <canvas width="{{mapWidth*tileSize}}" height="{{mapHeight*tileSize}}" id="map" ng-click="clickMap($event)"></canvas>
 </div>
 
 <div modal="showModal" options="modalOpts">
@@ -44,7 +51,7 @@
 </div>
 
 <div modal="showName" options="modalOpts">
-  <div class="modal-header"><h3>Choose a name</h3></div>
+  <div class="modal-header"><h3>Give your Map a name</h3></div>
 
   <div class="modal-body">
     <label>Name:</label>
