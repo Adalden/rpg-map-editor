@@ -33,7 +33,7 @@ body {
   width: 190px;
 }
 #sideBar .tile {
-  display: inline-block;
+  float: left;
   border: 2px solid transparent;
 }
 #sideBar .tile.selected {

@@ -9,13 +9,17 @@ angular.module('editor').controller('mainCtrl',
     $scope.mapWidth = 22;
     $scope.mapHeight = 14;
 
-    var map = [];
-    for (var i = 0; i < $scope.mapWidth; ++i) {
-      var arr = [];
-      for (var j = 0; j < $scope.mapHeight; ++j) {
-        arr.push(9);
+    var map;
+
+    function createMapArray(w, h, t) {
+      map = [];
+      for (var i = 0; i < w; ++i) {
+        var arr = [];
+        for (var j = 0; j < h; ++j) {
+          arr.push(t);
+        }
+        map.push(arr);
       }
-      map.push(arr);
     }
 
     $scope.menu = [
@@ -28,11 +32,20 @@ angular.module('editor').controller('mainCtrl',
       dialogFade: true
     };
 
+    $scope.newTileOptions = [
+      { name: 'dirt', tile: 9 },
+      { name: 'rock', tile: 33 },
+      { name: 'grass', tile: 35 }
+    ];
+    $scope.newTileOption = $scope.newTileOptions[0];
 
-    $scope.newMap = function (name, width, height) {
+
+    $scope.newMap = function (name, width, height, tile) {
       $scope.title = name;
       $scope.mapWidth = width;
       $scope.mapHeight = height;
+      createMapArray(width, height, tile);
+      setTimeout(redrawCanvas);
       $scope.showModal = false;
     };
 
@@ -101,6 +114,8 @@ angular.module('editor').controller('mainCtrl',
       var sy = Math.floor(tileNum / cols);
       ctx.drawImage(img, sx * (ts + margin), sy * (ts + margin), ts, ts, x * ts, y * ts, ts, ts);
     }
+
+    createMapArray($scope.mapWidth, $scope.mapHeight, 9);
 
     var img = new Image();
     img.onload = function () {

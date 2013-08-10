@@ -22,10 +22,12 @@
     </tab>
     <tab heading="Events"></tab>
     <tab heading="Properties">
-      <label>Width:</label>
-      <input type="text" ng-model="mapWidth">
-      <label>Height:</label>
-      <input type="text" ng-model="mapHeight">
+      <label>Width: {{mapWidth}} columns</label>
+      <button class="btn">-</button>
+      <button class="btn">+</button>
+      <label>Height: {{mapHeight}} rows</label>
+      <button class="btn">-</button>
+      <button class="btn">+</button>
     </tab>
   </tabset>
 </div>
@@ -43,10 +45,12 @@
     <input type="text" ng-model="newMapWidth"> Tiles
     <label>Height:</label>
     <input type="text" ng-model="newMapHeight"> Tiles
+    <label>Default Tile:</label>
+    <select ng-model="newTileOption" ng-options="o.name for o in newTileOptions"></select>
   </div>
   <div class="modal-footer">
     <button class="btn" ng-click="showModal=false">Cancel</button>
-    <button class="btn btn-success" ng-disabled="!newMapName || !newMapWidth || !newMapHeight" ng-click="newMap(newMapName, newMapWidth, newMapHeight)">Create New Map</button>
+    <button class="btn btn-success" ng-disabled="!newMapName || !newMapWidth || !newMapHeight" ng-click="newMap(newMapName, newMapWidth, newMapHeight, newTileOption.tile)">Create New Map</button>
   </div>
 </div>
 
