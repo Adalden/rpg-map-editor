@@ -1,7 +1,8 @@
 <div class="navbar">
   <div class="navbar-inner">
-    <a class="brand">{{title}}</a>
+    <a class="brand" ng-click="showName=true; newName=title" style="cursor:pointer">{{title}}</a>
     <ul class="nav">
+      <li><a ng-click="showModal=true" style="cursor:pointer">New</a></li>
       <li ng-repeat="item in menu">
         <a>{{item.label}}</a>
       </li>
@@ -11,16 +12,46 @@
 
 <div id="sideBar">
   <tabset>
-    <tab heading="Tiles">
+    <tab heading="Properties">
       <label>Width:</label>
       <input type="text" ng-model="mapWidth">
       <label>Height:</label>
       <input type="text" ng-model="mapHeight">
     </tab>
     <tab heading="Events"></tab>
+    <tab heading="Tiles"></tab>
   </tabset>
 </div>
 
 <div id="mapContainer">
   <canvas width="{{mapWidth}}" height="{{mapHeight}}" id="map"></canvas>
+</div>
+
+<div modal="showModal" options="modalOpts">
+  <div class="modal-header"><h3>New Map</h3></div>
+  <div class="modal-body">
+    <label>Name:</label>
+    <input type="text" ng-model="newMapName">
+    <label>Width:</label>
+    <input type="text" ng-model="newMapWidth"> Tiles
+    <label>Height:</label>
+    <input type="text" ng-model="newMapHeight"> Tiles
+  </div>
+  <div class="modal-footer">
+    <button class="btn" ng-click="showModal=false">Cancel</button>
+    <button class="btn btn-success" ng-disabled="!newMapName || !newMapWidth || !newMapHeight" ng-click="newMap(newMapName, newMapWidth, newMapHeight)">Create New Map</button>
+  </div>
+</div>
+
+<div modal="showName" options="modalOpts">
+  <div class="modal-header"><h3>Choose a name</h3></div>
+
+  <div class="modal-body">
+    <label>Name:</label>
+    <input type="text" ng-model="newName">
+  </div>
+  <div class="modal-footer">
+    <button class="btn" ng-click="showName=false">Cancel</button>
+    <button class="btn btn-success" ng-disabled="!newName" ng-click="title=newName; showName=false">Accept</button>
+  </div>
 </div>
