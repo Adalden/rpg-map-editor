@@ -6,3 +6,27 @@ html,
 body {
   height: 100%;
 }
+#mapContainer {
+  position: absolute;
+  top: 62px;
+  bottom: 0;
+  left: 200px;
+  right: 0;
+  overflow: auto;
+}
+#mapContainer canvas {
+  background-color: #808080;
+}
+#sideBar {
+  width: 200px;
+}
+#sideBar .tab-pane {
+  position: absolute;
+  overflow: auto;
+  top: 120px;
+  width: 200px;
+  bottom: 0;
+}
+#sideBar .tab-pane input {
+  width: 180px;
+}

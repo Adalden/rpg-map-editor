@@ -1,5 +1,5 @@
 /* global angular, mNav */
-angular.module('app').factory('nav',
+angular.module('editor').factory('nav',
   function () {
     'use strict';
 

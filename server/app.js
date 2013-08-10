@@ -7,8 +7,8 @@ var app = express();
 app.set('port', process.env.PORT || 3000);
 
 var sessOptions = {
-  key: 'angular-app.sid',
-  secret: 'my secret'
+  key: 'rpg-map-editor.sid',
+  secret: '87o09aiu$#%87e09d87op8y=35rc13g-s,.p0y34y-3a.prsch309'
 };
 
 var devConfig = function () {

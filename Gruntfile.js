@@ -48,7 +48,7 @@ module.exports = function (grunt) {
 
     ngtemplates: {
       options:  { base: 'client' },
-      app: {
+      editor: {
         src: ['client/tmpl/**/*.html'],
         dest: 'build/generated/js/ngtemplates.js'
       }

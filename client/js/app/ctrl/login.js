@@ -1,5 +1,5 @@
 /* global angular */
-angular.module('app').controller('loginCtrl',
+angular.module('editor').controller('loginCtrl',
   function ($scope, nav) {
     'use strict';
 

@@ -1,10 +1,13 @@
 /* global angular */
-angular.module('app').controller('mainCtrl',
-  function ($scope, nav) {
+angular.module('editor').controller('mainCtrl',
+  function ($scope) {
     'use strict';
 
-    $scope.title = 'App';
-    $scope.nav = nav;
-    $scope.msg = 'Main';
+    $scope.title = 'untitled map';
+
+    $scope.menu = [
+      { label: 'Menu' },
+      { label: 'Edit' }
+    ];
   }
 );

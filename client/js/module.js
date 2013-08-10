@@ -1,5 +1,5 @@
 /* global angular, mNav */
-angular.module('app', ['ui.bootstrap']).config(
+angular.module('editor', ['ui.bootstrap']).config(
   function ($routeProvider) {
     'use strict';
 
