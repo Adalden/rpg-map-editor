@@ -19,12 +19,33 @@ angular.module('editor').controller('newMapCtrl',
     };
 
     $scope.accept = function (name, width, height, tile) {
+      if ($scope.validate(name, width, height)) {
+        // TODO:: Display An Error Message Right Here
+        return;
+      }
+
       map.title = name;
       map.width = width;
       map.height = height;
       map.new(tile);
       $rootScope.$emit('mapChanged');
       dialog.close();
+    };
+
+    $scope.validate = function (name, width, height) {
+      if (!name) {
+        return true;
+      }
+
+      if (width === '' || isNaN(width) || width < 0) {
+        return true;
+      }
+
+      if (height === '' || isNaN(height) || height < 0) {
+        return true;
+      }
+
+      return false;
     };
   }
 );

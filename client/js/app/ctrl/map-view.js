@@ -43,7 +43,6 @@ angular.module('editor').controller('mapViewCtrl',
       ctx.drawImage(img, sx * ts, sy * ts, ts, ts, x * ts, y * ts, ts, ts);
     }
 
-
     var img = new Image();
     img.onload = function () {
       map.new();
