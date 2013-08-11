@@ -1,8 +1,8 @@
 <div class="navbar">
   <div class="navbar-inner">
-    <a class="brand" ng-click="showName=true; newName=title" style="cursor:pointer">{{title}}</a>
+    <a class="brand" ng-click="prepChangeName()">{{map.title}}</a>
     <ul class="nav">
-      <li><a ng-click="showModal=true" style="cursor:pointer">New</a></li>
+      <li><a ng-click="prepNewMap()">New</a></li>
       <li ng-repeat="item in menu">
         <a>{{item.label}}</a>
       </li>
@@ -10,31 +10,9 @@
   </div>
 </div>
 
-<div id="sideBar">
-  <tabset>
-    <tab heading="Tiles">
-      <div
-        class="tile"
-        ng-class="{selected:num==curTileChoice}"
-        ng-click="$parent.curTileChoice=num"
-        style="{{getStyle(num)}}"
-        ng-repeat="num in getNumber(tileTotal)"></div>
-    </tab>
-    <tab heading="Events"></tab>
-    <tab heading="Properties">
-      <label>Width: {{mapWidth}} columns</label>
-      <button class="btn">-</button>
-      <button class="btn">+</button>
-      <label>Height: {{mapHeight}} rows</label>
-      <button class="btn">-</button>
-      <button class="btn">+</button>
-    </tab>
-  </tabset>
-</div>
 
-<div id="mapContainer">
-  <canvas width="{{mapWidth*tileSize}}" height="{{mapHeight*tileSize}}" id="map" ng-click="clickMap($event)"></canvas>
-</div>
+
+
 
 <div modal="showModal" options="modalOpts">
   <div class="modal-header"><h3>New Map</h3></div>
@@ -63,6 +41,6 @@
   </div>
   <div class="modal-footer">
     <button class="btn" ng-click="showName=false">Cancel</button>
-    <button class="btn btn-success" ng-disabled="!newName" ng-click="title=newName; showName=false">Accept</button>
+    <button class="btn btn-success" ng-disabled="!newName" ng-click="changeName(newName)">Accept</button>
   </div>
 </div>

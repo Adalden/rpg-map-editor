@@ -3,15 +3,15 @@
   <head>
     <title>Map Editor</title>
     <!-- ref:css css/<%= appName %>.min.css -->
-    <link rel="stylesheet" href="css/app.css">
     <link rel="stylesheet" href="css/lib/bootstrap.css">
+    <link rel="stylesheet" href="css/app.css">
     <!-- endref -->
   </head>
   <body>
 
-    <div header id="header"></div>
-    <div ng-view id="view"></div>
-    <div footer id="footer"></div>
+    <div ui-view="header" id="header"></div>
+    <div ui-view="sideBar" id="sideBar"></div>
+    <div ui-view="mapView" id="mapView"></div>
 
     <!-- ref:js js/<%= appName %>.min.js -->
     <!-- Libraries -->
@@ -21,23 +21,26 @@
     <script src="js/lib/underscore.js"></script>
     <script src="js/lib/angular.js"></script>
     <script src="js/lib/ui-bootstrap.js"></script>
+    <script src="js/lib/angular-ui-router.js"></script>
 
     <!-- Module -->
     <script src="js/module.js"></script>
 
     <!-- Controllers -->
-    <script src="js/app/ctrl/main.js"></script>
-    <script src="js/app/ctrl/login.js"></script>
+    <script src="js/app/ctrl/header.js"></script>
+    <script src="js/app/ctrl/map-view.js"></script>
+    <script src="js/app/ctrl/side-bar.js"></script>
 
     <!-- Directives -->
 
     <!-- Services -->
-    <script src="js/app/service/nav.js"></script>
+    <script src="js/app/service/map.js"></script>
+    <script src="js/app/service/tools.js"></script>
+    <script src="js/app/service/defaults.js"></script>
 
     <!-- Filters -->
 
     <!-- Other -->
-    <script src="js/app/nav.js"></script>
 
     <!-- Main -->
     <script src="js/main.js"></script>

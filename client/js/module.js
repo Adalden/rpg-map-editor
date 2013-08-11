@@ -1,17 +1,28 @@
-/* global angular, mNav */
-angular.module('editor', ['ui.bootstrap']).config(
-  function ($routeProvider) {
+/* global angular */
+angular.module('editor', ['ui.bootstrap', 'ui.state']).config(
+  function ($stateProvider, $urlRouterProvider) {
     'use strict';
 
-    for (var i = 0; i < mNav.length; ++i) {
-      $routeProvider.when(mNav[i].url, {
-        templateUrl: mNav[i].tmpl,
-        controller: mNav[i].ctrl,
-        name: mNav[i].label,
-        url: mNav[i].url
-      });
-    }
+    $urlRouterProvider.otherwise('/');
 
-    $routeProvider.otherwise({ redirectTo: '/' });
+    $stateProvider.state('index',
+      {
+        url: '/',
+        views: {
+          header: {
+            templateUrl: 'tmpl/header.html',
+            controller: 'headerCtrl'
+          },
+          sideBar: {
+            templateUrl: 'tmpl/side-bar.html',
+            controller: 'sideBarCtrl'
+          },
+          mapView: {
+            templateUrl: 'tmpl/map-view.html',
+            controller: 'mapViewCtrl'
+          }
+        }
+      }
+    );
   }
 );

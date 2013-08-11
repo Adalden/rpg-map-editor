@@ -1,0 +1,19 @@
+<tabset>
+  <tab heading="Tiles">
+    <div
+      class="tile"
+      ng-class="{selected:num==tools.curTile}"
+      ng-click="choseTile(num)"
+      style="{{getStyle(num)}}"
+      ng-repeat="num in getNumber()"></div>
+  </tab>
+  <tab heading="Events"></tab>
+  <tab heading="Properties">
+    <label>Width: {{map.width}} columns</label>
+    <button class="btn">-</button>
+    <button class="btn">+</button>
+    <label>Height: {{map.height}} rows</label>
+    <button class="btn">-</button>
+    <button class="btn">+</button>
+  </tab>
+</tabset>
