@@ -25,20 +25,32 @@ angular.module('editor', ['ui.bootstrap', 'ui.state']).config(
       })
 
         .state('index.changeName', {
-          views: {
-            modal: {
+          onEnter: function ($state, $dialog) {
+            $dialog.dialog({
+              dialogFade: true,
+              backdropFade: true,
               templateUrl: 'tmpl/modals/change-name.html',
-              controller: 'headerCtrl'
-            }
+              controller: 'changeNameCtrl'
+            }).open().then(
+              function () {
+                return $state.transitionTo('index');
+              }
+            );
           }
         })
 
         .state('index.newMap', {
-          views: {
-            modal: {
+          onEnter: function ($state, $dialog) {
+            $dialog.dialog({
+              dialogFade: true,
+              backdropFade: true,
               templateUrl: 'tmpl/modals/new-map.html',
-              controller: 'headerCtrl'
-            }
+              controller: 'newMapCtrl'
+            }).open().then(
+              function () {
+                return $state.transitionTo('index');
+              }
+            );
           }
         });
   }
