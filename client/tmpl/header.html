@@ -10,37 +10,4 @@
   </div>
 </div>
 
-
-
-
-
-<div modal="showModal" options="modalOpts">
-  <div class="modal-header"><h3>New Map</h3></div>
-  <div class="modal-body">
-    <label>Name:</label>
-    <input type="text" ng-model="newMapName">
-    <label>Width:</label>
-    <input type="text" ng-model="newMapWidth"> Tiles
-    <label>Height:</label>
-    <input type="text" ng-model="newMapHeight"> Tiles
-    <label>Default Tile:</label>
-    <select ng-model="newTileOption" ng-options="o.name for o in newTileOptions"></select>
-  </div>
-  <div class="modal-footer">
-    <button class="btn" ng-click="showModal=false">Cancel</button>
-    <button class="btn btn-success" ng-disabled="!newMapName || !newMapWidth || !newMapHeight" ng-click="newMap(newMapName, newMapWidth, newMapHeight, newTileOption.tile)">Create New Map</button>
-  </div>
-</div>
-
-<div modal="showName" options="modalOpts">
-  <div class="modal-header"><h3>Give your Map a name</h3></div>
-
-  <div class="modal-body">
-    <label>Name:</label>
-    <input type="text" ng-model="newName">
-  </div>
-  <div class="modal-footer">
-    <button class="btn" ng-click="showName=false">Cancel</button>
-    <button class="btn btn-success" ng-disabled="!newName" ng-click="changeName(newName)">Accept</button>
-  </div>
-</div>
+<div ui-view="modal"></div>

@@ -5,8 +5,8 @@ angular.module('editor', ['ui.bootstrap', 'ui.state']).config(
 
     $urlRouterProvider.otherwise('/');
 
-    $stateProvider.state('index',
-      {
+    $stateProvider
+      .state('index', {
         url: '/',
         views: {
           header: {
@@ -22,7 +22,24 @@ angular.module('editor', ['ui.bootstrap', 'ui.state']).config(
             controller: 'mapViewCtrl'
           }
         }
-      }
-    );
+      })
+
+        .state('index.changeName', {
+          views: {
+            modal: {
+              templateUrl: 'tmpl/modals/change-name.html',
+              controller: 'headerCtrl'
+            }
+          }
+        })
+
+        .state('index.newMap', {
+          views: {
+            modal: {
+              templateUrl: 'tmpl/modals/new-map.html',
+              controller: 'headerCtrl'
+            }
+          }
+        });
   }
 );

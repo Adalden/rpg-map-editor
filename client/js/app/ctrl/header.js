@@ -1,6 +1,6 @@
 /* global angular */
 angular.module('editor').controller('headerCtrl',
-  function ($scope, $rootScope, $timeout, map) {
+  function ($scope, $rootScope, $state, map) {
     'use strict';
 
     $scope.map = map;
@@ -23,16 +23,18 @@ angular.module('editor').controller('headerCtrl',
     $scope.newTileOption = $scope.newTileOptions[0];
 
     $scope.prepChangeName = function () {
-      $scope.showName = true;
+      $state.transitionTo('index.changeName');
+      $scope.showModal = true;
       $scope.newName = map.title;
     };
 
     $scope.changeName = function (title) {
       map.title = title;
-      $scope.showName = false;
+      $scope.showModal = false;
     };
 
     $scope.prepNewMap = function () {
+      $state.transitionTo('index.newMap');
       $scope.showModal = true;
     };
 
@@ -41,11 +43,7 @@ angular.module('editor').controller('headerCtrl',
       map.width = width;
       map.height = height;
       map.new(tile);
-      $timeout(
-        function () {
-          $rootScope.$emit('mapChanged');
-        }
-      );
+      $rootScope.$emit('mapChanged');
       $scope.showModal = false;
     };
   }
