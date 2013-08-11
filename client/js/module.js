@@ -1,9 +1,9 @@
-/* global angular */
+/* global angular, mainMenu, _ */
 angular.module('editor', ['ui.bootstrap', 'ui.state']).config(
   function ($stateProvider, $urlRouterProvider) {
     'use strict';
 
-    $urlRouterProvider.otherwise('/');
+    var menu = mainMenu;
 
     $stateProvider
       .state('index', {
@@ -22,30 +22,27 @@ angular.module('editor', ['ui.bootstrap', 'ui.state']).config(
             controller: 'mapViewCtrl'
           }
         }
-      })
+      });
 
-        .state('index.changeName', {
+    _.each(menu, function (m) {
+      _.each(m.items, function (i) {
+        createState(i);
+      });
+    });
+
+    $urlRouterProvider.otherwise('/');
+
+    // -- Private Functions ---------------------------
+
+    function createState(m) {
+      $stateProvider
+        .state(m.state, {
           onEnter: function ($state, $dialog) {
             $dialog.dialog({
               dialogFade: true,
               backdropFade: true,
-              templateUrl: 'tmpl/modals/change-name.html',
-              controller: 'changeNameCtrl'
-            }).open().then(
-              function () {
-                return $state.transitionTo('index');
-              }
-            );
-          }
-        })
-
-        .state('index.newMap', {
-          onEnter: function ($state, $dialog) {
-            $dialog.dialog({
-              dialogFade: true,
-              backdropFade: true,
-              templateUrl: 'tmpl/modals/new-map.html',
-              controller: 'newMapCtrl'
+              templateUrl: m.tmpl,
+              controller: m.ctrl
             }).open().then(
               function () {
                 return $state.transitionTo('index');
@@ -53,5 +50,6 @@ angular.module('editor', ['ui.bootstrap', 'ui.state']).config(
             );
           }
         });
+    }
   }
 );

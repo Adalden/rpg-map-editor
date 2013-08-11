@@ -6,6 +6,9 @@ html,
 body {
   height: 100%;
 }
+.form-fix {
+  margin: 0;
+}
 #header a {
   cursor: pointer;
 }
