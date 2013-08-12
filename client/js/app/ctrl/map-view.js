@@ -6,7 +6,9 @@ angular.module('editor').controller('mapViewCtrl',
     $scope.map = map;
     $scope.defaults = defaults;
 
-    $scope.clickMap = function (e) {
+    $scope.placeTile = function (e) {
+      if (e.which === 0) return;
+
       var x = e.offsetX;
       var y = e.offsetY;
 

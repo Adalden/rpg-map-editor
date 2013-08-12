@@ -19,6 +19,18 @@ mainMenu = [
         state: 'index.newMap',
         tmpl: 'tmpl/modals/new-map.html',
         ctrl: 'newMapCtrl'
+      },
+      {
+        name: 'Import',
+        state: 'index.import',
+        tmpl: 'tmpl/modals/import.html',
+        ctrl: 'importCtrl'
+      },
+      {
+        name: 'Export',
+        state: 'index.export',
+        tmpl: 'tmpl/modals/export.html',
+        ctrl: 'exportCtrl'
       }
     ]
   },

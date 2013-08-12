@@ -1,0 +1,16 @@
+<form class="form-fix">
+  <div class="modal-header">
+    <h3>Export Current Map</h3>
+  </div>
+
+  <div class="modal-body">
+    <label>Map Data:</label>
+    <textarea cols="30" rows="10">{{map}}</textarea>
+    <label>Tiles URL:</label>
+    <input type="text" value="{{url}}">
+  </div>
+
+  <div class="modal-footer">
+    <input type="submit" class="btn" ng-click="close()" value="Cancel">
+  </div>
+</form>

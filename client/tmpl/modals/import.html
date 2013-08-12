@@ -1,0 +1,15 @@
+<form class="form-fix">
+  <div class="modal-header">
+    <h3>Import A Map</h3>
+  </div>
+
+  <div class="modal-body">
+    <label>Paste your Map Data here:</label>
+    <textarea cols="30" rows="10" ng-model="newMap" focus-me="true"></textarea>
+  </div>
+
+  <div class="modal-footer">
+    <input type="button" class="btn" ng-click="close()" value="Cancel">
+    <input type="submit" class="btn btn-success" ng-disabled="!newMap" ng-click="accept(newMap)" value="Accept">
+  </div>
+</form>
