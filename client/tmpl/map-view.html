@@ -1,3 +1,6 @@
 <div id="mapContainer">
-  <canvas width="{{map.width*defaults.tileSize}}" height="{{map.height*defaults.tileSize}}" id="map" ng-mousemove="placeTile($event)"></canvas>
+  <canvas width="{{map.width*defaults.tileSize}}" height="{{map.height*defaults.tileSize}}" id="map"
+    ng-mousemove="mouseMove($event)"
+    ng-click="click($event)"
+    ng-right-click="rightClick($event)"></canvas>
 </div>

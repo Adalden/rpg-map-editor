@@ -10,6 +10,10 @@ angular.module('editor').controller('sideBarCtrl',
       tools.curTile = newTile;
     };
 
+    $scope.choseTile2 = function (newTile) {
+      tools.curTile2 = newTile;
+    };
+
     $scope.getNumber = function () {
       var arr = [];
       for (var i = 0; i < defaults.numTiles; ++i) {

@@ -2,8 +2,9 @@
   <tab heading="Tiles">
     <div
       class="tile"
-      ng-class="{selected:num==tools.curTile}"
+      ng-class="{selected:num==tools.curTile || num==tools.curTile2}"
       ng-click="choseTile(num)"
+      ng-right-click="choseTile2(num)"
       style="{{getStyle(num)}}"
       ng-repeat="num in getNumber()"></div>
   </tab>

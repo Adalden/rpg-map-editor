@@ -6,19 +6,39 @@ angular.module('editor').controller('mapViewCtrl',
     $scope.map = map;
     $scope.defaults = defaults;
 
-    $scope.placeTile = function (e) {
-      if (e.which === 0) return;
+    $scope.mouseMove = function (e) {
+      if (e.which === 1) {
+        placeTile(e);
+      }
 
+      if (e.which === 3) {
+        placeTile(e);
+      }
+    };
+
+    $scope.click = function (e) {
+      e.preventDefault();
+      if (e.which === 1) {
+        placeTile(e);
+      }
+    };
+
+    $scope.rightClick = function (e) {
+      placeTile(e);
+    };
+
+    function placeTile(e) {
       var x = e.offsetX;
       var y = e.offsetY;
 
       var tileX = Math.floor(x / defaults.tileSize);
       var tileY = Math.floor(y / defaults.tileSize);
 
-      map.data[tileX][tileY] = tools.curTile;
+      var tileNum = (e.which === 1) ? tools.curTile : tools.curTile2;
+      map.data[tileX][tileY] = tileNum;
 
       $rootScope.$emit('mapChanged');
-    };
+    }
 
     $rootScope.$on('mapChanged', redrawCanvas);
 

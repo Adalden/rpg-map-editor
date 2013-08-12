@@ -4,7 +4,8 @@ angular.module('editor').factory('tools',
     'use strict';
 
     return {
-      curTile: 0
+      curTile: 0,
+      curTile2: 0
     };
   }
 );
