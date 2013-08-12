@@ -27,6 +27,12 @@ mainMenu = [
         ctrl: 'openCtrl'
       },
       {
+        name: 'Save As',
+        state: 'index.saveAs',
+        tmpl: 'tmpl/modals/save-as.html',
+        ctrl: 'saveAsCtrl'
+      },
+      {
         name: 'Import',
         state: 'index.import',
         tmpl: 'tmpl/modals/import.html',

@@ -52,3 +52,10 @@ body {
   cursor: pointer;
   background-color: #ccc;
 }
+#modalSaveAs .save-as-item {
+  padding: 3px;
+}
+#modalSaveAs .save-as-item:hover {
+  cursor: pointer;
+  background-color: #ccc;
+}

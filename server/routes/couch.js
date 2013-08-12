@@ -11,7 +11,8 @@ module.exports = function (app) {
 
   app.get('/maps', getMaps);
   app.get('/map/:id', getMapFromId);
-  app.post('/saveMap', saveMap);
+  app.post('/map', saveMap);
+  app.put('/map', updateMap);
 };
 
 function getMaps(req, res) {
@@ -39,7 +40,6 @@ function getMapFromId(req, res) {
 
   request(url + '/' + id,
     function (err, resp, body) {
-      console.log(body);
       res.send(body);
     }
   );
@@ -48,5 +48,33 @@ function getMapFromId(req, res) {
 function saveMap(req, res) {
   'use strict';
 
-  res.send('not implemented');
+  var map = req.body;
+
+  request.post({
+    url: url,
+    json: map
+  }, function (err, resp, body) {
+      res.send(body);
+    }
+  );
+}
+
+function updateMap(req, res) {
+  'use strict';
+
+  var map = req.body;
+
+  request(url + '/' + map._id,
+    function (err, resp, body) {
+      body = JSON.parse(body);
+      map._rev = body._rev;
+
+      request.put({
+        url: url + '/' + map._id,
+        json: map
+      }, function (err, resp, body) {
+        res.send(body);
+      });
+    }
+  );
 }

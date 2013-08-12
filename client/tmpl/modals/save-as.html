@@ -1,0 +1,21 @@
+<div id="modalSaveAs">
+  <form class="form-fix">
+    <div class="modal-header">
+      <h3>Save As</h3>
+    </div>
+
+    <div class="modal-body">
+      <label>Map Name:</label>
+      <input type="text" ng-model="name" focus-me="true">
+      <label>Existing Maps:</label>
+      <div class="save-as-item" ng-repeat="item in items" ng-click="setName(item)">
+        {{item.name}}
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <input type="button" class="btn" ng-click="close()" value="Cancel">
+      <input type="submit" class="btn btn-success" ng-disabled="!name" ng-click="save(name)" value="Save">
+    </div>
+  </form>
+</div>
