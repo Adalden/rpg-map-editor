@@ -21,6 +21,12 @@ mainMenu = [
         ctrl: 'newMapCtrl'
       },
       {
+        name: 'Open',
+        state: 'index.open',
+        tmpl: 'tmpl/modals/open.html',
+        ctrl: 'openCtrl'
+      },
+      {
         name: 'Import',
         state: 'index.import',
         tmpl: 'tmpl/modals/import.html',
