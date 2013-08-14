@@ -37,7 +37,7 @@ angular.module('editor', ['ui.bootstrap', 'ui.state']).config(
     function createState(m) {
       $stateProvider
         .state(m.state, {
-          onEnter: function ($state, $dialog) {
+          onEnter: ['$state', '$dialog', function ($state, $dialog) {
             $dialog.dialog({
               dialogFade: true,
               backdropFade: true,
@@ -48,7 +48,7 @@ angular.module('editor', ['ui.bootstrap', 'ui.state']).config(
                 return $state.transitionTo('index');
               }
             );
-          }
+          }]
         });
     }
   }
