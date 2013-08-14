@@ -5,3 +5,5 @@ npm-debug.log
 build/
 
 config/production.js
+
+client/css/app.css

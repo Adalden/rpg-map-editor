@@ -26,7 +26,9 @@ angular.module('editor', ['ui.bootstrap', 'ui.state']).config(
 
     _.each(menu, function (m) {
       _.each(m.items, function (i) {
-        createState(i);
+        if (!i.isCommand) {
+          createState(i);
+        }
       });
     });
 

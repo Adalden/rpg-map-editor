@@ -1,5 +1,16 @@
 <div id="mapContainer">
-  <canvas width="{{map.width*defaults.tileSize}}" height="{{map.height*defaults.tileSize}}" id="map"
+  <canvas id="map"
+    width="{{map.width*defaults.tileSize}}"
+    height="{{map.height*defaults.tileSize}}"></canvas>
+
+  <canvas id="grid"
+    width="{{map.width*defaults.tileSize}}"
+    height="{{map.height*defaults.tileSize}}"
+    ng-class="{'hide-me':!tools.showGrid}"></canvas>
+
+  <canvas id="clickLayer"
+    width="{{map.width*defaults.tileSize}}"
+    height="{{map.height*defaults.tileSize}}"
     ng-mousemove="mouseMove($event)"
     ng-click="click($event)"
     ng-right-click="rightClick($event)"></canvas>

@@ -48,7 +48,13 @@ mainMenu = [
   },
   {
     name: 'Edit',
-    items: []
+    items: [
+      {
+        isCommand: true,
+        name: 'Toggle Grid',
+        id: 'grid'
+      }
+    ]
   },
   {
     name: 'Help',

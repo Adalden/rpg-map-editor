@@ -5,7 +5,8 @@ angular.module('editor').factory('tools',
 
     return {
       curTile: 0,
-      curTile2: 0
+      curTile2: 0,
+      showGrid: false
     };
   }
 );

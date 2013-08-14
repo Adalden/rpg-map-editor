@@ -5,7 +5,13 @@
   left: $sideBarWidth
   right: 0
   overflow: auto
+  border: 5px solid
+  background-color: #ccc
 
   canvas
-    background-color: gray
-    border: 5px solid
+    position: absolute
+    top: 0
+    left: 0
+
+    &.hide-me
+      display: none

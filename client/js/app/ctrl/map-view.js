@@ -5,6 +5,7 @@ angular.module('editor').controller('mapViewCtrl',
 
     $scope.map = map;
     $scope.defaults = defaults;
+    $scope.tools = tools;
 
     $scope.mouseMove = function (e) {
       if (e.which === 1) {
@@ -45,6 +46,7 @@ angular.module('editor').controller('mapViewCtrl',
     function redrawCanvas() {
       $timeout(
         function () {
+          prepGrid();
           var canvas = document.getElementById('map');
           var ctx = canvas.getContext('2d');
           var ts = defaults.tileSize;
@@ -71,5 +73,20 @@ angular.module('editor').controller('mapViewCtrl',
       $rootScope.$emit('mapChanged');
     };
     img.src = defaults.tileUrl;
+
+    prepGrid();
+
+    function prepGrid() {
+      var canvas = document.getElementById('grid');
+      var ctx = canvas.getContext('2d');
+      var ts = defaults.tileSize;
+
+      for (var i = 0; i < map.width; ++i) {
+        for (var j = 0; j < map.height; ++j) {
+          ctx.strokeStyle = 'black';
+          ctx.strokeRect(ts * i, ts * j, ts, ts);
+        }
+      }
+    }
   }
 );
