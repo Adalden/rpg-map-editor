@@ -10,7 +10,8 @@
     "stylus": "*",
     "config": "~0.4.29",
     "request": "~2.26.0",
-    "underscore": "~1.5.1"
+    "underscore": "~1.5.1",
+    "password-hash": "~1.2.1"
   },
   "devDependencies": {
     "grunt": "~0.4.1",

@@ -1,14 +1,11 @@
-/* jshint node:true */
-
+/* jshint node:true, strict:false */
 var request = require('request'),
           _ = require('underscore'),
       couch = require('config').couch;
 
-var url = 'http://' + couch.host + ':' + couch.port + '/' + couch.db;
+var url = 'http://' + couch.host + ':' + couch.port + '/' + couch.db.maps;
 
 module.exports = function (app) {
-  'use strict';
-
   app.get('/maps', getMaps);
   app.get('/map/:id', getMapFromId);
   app.post('/map', saveMap);
@@ -16,8 +13,6 @@ module.exports = function (app) {
 };
 
 function getMaps(req, res) {
-  'use strict';
-
   request(url + '/_all_docs?include_docs=true',
     function (err, resp, body) {
       var arr = [];
@@ -34,8 +29,6 @@ function getMaps(req, res) {
 }
 
 function getMapFromId(req, res) {
-  'use strict';
-
   var id = req.params.id;
 
   request(url + '/' + id,
@@ -46,8 +39,6 @@ function getMapFromId(req, res) {
 }
 
 function saveMap(req, res) {
-  'use strict';
-
   var map = req.body;
 
   request.post({
@@ -60,8 +51,6 @@ function saveMap(req, res) {
 }
 
 function updateMap(req, res) {
-  'use strict';
-
   var map = req.body;
 
   request(url + '/' + map._id,

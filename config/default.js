@@ -3,6 +3,9 @@ module.exports = {
   couch: {
     host: 'localhost',
     port: '5984',
-    db: 'rpg_maps'
+    db: {
+      maps: 'rpg_maps',
+      users: 'rpg_users'
+    }
   }
 };

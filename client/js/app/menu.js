@@ -8,6 +8,11 @@ mainMenu = [
         state: 'index.changeName',
         tmpl: 'tmpl/modals/change-name.html',
         ctrl: 'changeNameCtrl'
+      },
+      {
+        state: 'index.login',
+        tmpl: 'tmpl/modals/login.html',
+        ctrl: 'loginCtrl'
       }
     ]
   },
@@ -24,13 +29,15 @@ mainMenu = [
         name: 'Open',
         state: 'index.open',
         tmpl: 'tmpl/modals/open.html',
-        ctrl: 'openCtrl'
+        ctrl: 'openCtrl',
+        loggedIn: true
       },
       {
         name: 'Save As',
         state: 'index.saveAs',
         tmpl: 'tmpl/modals/save-as.html',
-        ctrl: 'saveAsCtrl'
+        ctrl: 'saveAsCtrl',
+        loggedIn: true
       },
       {
         name: 'Import',
@@ -42,7 +49,7 @@ mainMenu = [
         name: 'Export',
         state: 'index.export',
         tmpl: 'tmpl/modals/export.html',
-        ctrl: 'exportCtrl'
+        ctrl: 'defaultModalCtrl'
       }
     ]
   },
@@ -64,6 +71,13 @@ mainMenu = [
         state: 'index.controls',
         tmpl: 'tmpl/modals/controls.html',
         ctrl: 'defaultModalCtrl'
+      },
+      {
+        name: 'Who Am I',
+        state: 'index.whoAmI',
+        tmpl: 'tmpl/modals/who-am-i.html',
+        ctrl: 'defaultModalCtrl',
+        loggedIn: true
       },
       {
         name: 'About',

@@ -5,11 +5,15 @@
       <li ng-repeat="m in menu" class="dropdown" ng-show="!m.hidden">
         <a class="dropdown-toggle">{{m.name}}</a>
         <ul class="dropdown-menu">
-          <li ng-repeat="i in m.items">
+          <li ng-repeat="i in m.items" ng-show="user.isLoggedIn || !i.loggedIn">
             <a ng-click="goToState(i)">{{i.name}}</a>
           </li>
         </ul>
       </li>
+    </ul>
+    <ul class="nav pull-right">
+      <li ng-show="!user.isLoggedIn" ng-click="goToState('index.login')"><a>Login</a></li>
+      <li ng-show="user.isLoggedIn" ng-click="logout()"><a>Logout</a></li>
     </ul>
   </div>
 </div>

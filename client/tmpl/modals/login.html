@@ -1,0 +1,18 @@
+<form class="form-fix">
+  <div class="modal-header">
+    <h3>Login</h3>
+  </div>
+
+  <div class="modal-body">
+    <label>Username:</label>
+    <input type="text" ng-model="user" focus-me="true">
+
+    <label>Password:</label>
+    <input type="password" ng-model="pass">
+  </div>
+
+  <div class="modal-footer">
+    <input type="button" class="btn" ng-click="close()" value="Cancel">
+    <input type="submit" class="btn btn-success" ng-click="login(user, pass)" ng-disabled="!user || !pass" value="Login">
+  </div>
+</form>
