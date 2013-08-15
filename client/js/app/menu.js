@@ -13,6 +13,11 @@ mainMenu = [
         state: 'index.login',
         tmpl: 'tmpl/modals/login.html',
         ctrl: 'loginCtrl'
+      },
+      {
+        state: 'index.signUp',
+        tmpl: 'tmpl/modals/sign-up.html',
+        ctrl: 'signUpCtrl'
       }
     ]
   },

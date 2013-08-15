@@ -1,6 +1,6 @@
 <form class="form-fix">
   <div class="modal-header">
-    <h3>Login</h3>
+    <h3>Sign Up</h3>
   </div>
 
   <div class="modal-body">
@@ -10,11 +10,14 @@
     <label>Password:</label>
     <input type="password" ng-model="pass">
 
-    <p><a ng-click="goToSignUp()">Don't have an account?</a></p>
+    <label>Confirm Password:</label>
+    <input type="password" ng-model="pass2">
+
+    <p><a ng-click="goToLogin()">Already have an account?</a></p>
   </div>
 
   <div class="modal-footer">
     <input type="button" class="btn" ng-click="close()" value="Cancel">
-    <input type="submit" class="btn btn-success" ng-click="login(user, pass)" ng-disabled="!user || !pass" value="Login">
+    <input type="submit" class="btn btn-success" ng-click="signup(user, pass)" ng-disabled="!user || !pass || pass != pass2" value="Sign Up">
   </div>
 </form>

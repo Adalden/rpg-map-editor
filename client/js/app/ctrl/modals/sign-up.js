@@ -1,5 +1,5 @@
 /* global angular, console */
-angular.module('editor').controller('loginCtrl',
+angular.module('editor').controller('signUpCtrl',
   function ($scope, $state, dialog, user) {
     'use strict';
 
@@ -7,8 +7,8 @@ angular.module('editor').controller('loginCtrl',
       dialog.close();
     };
 
-    $scope.login = function (username, pass) {
-      user.login(username, pass).then(
+    $scope.signup = function (username, pass) {
+      user.signup(username, pass).then(
         function () {
           dialog.close();
         },
@@ -19,9 +19,9 @@ angular.module('editor').controller('loginCtrl',
       );
     };
 
-    $scope.goToSignUp = function () {
+    $scope.goToLogin = function () {
       dialog.close();
-      $state.transitionTo('index.signUp');
+      $state.transitionTo('index.login');
     };
   }
 );

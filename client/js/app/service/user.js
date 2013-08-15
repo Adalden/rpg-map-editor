@@ -7,7 +7,8 @@ angular.module('editor').factory('user',
       isLoggedIn: false,
       data: null,
       login: login,
-      logout: logout
+      logout: logout,
+      signup: signup
     };
 
     function login(username, pass) {
@@ -19,6 +20,31 @@ angular.module('editor').factory('user',
       };
 
       $http.post('/login', obj).then(
+        function (resp) {
+          var d = resp.data;
+          if (!d.success) {
+            return deferred.reject(d.err);
+          }
+
+          user.isLoggedIn = true;
+          user.data = d.user;
+          deferred.resolve();
+        },
+        deferred.reject
+      );
+
+      return deferred.promise;
+    }
+
+    function signup(username, pass) {
+      var deferred = $q.defer();
+
+      var obj = {
+        user: username,
+        pass: pass
+      };
+
+      $http.post('/signup', obj).then(
         function (resp) {
           var d = resp.data;
           if (!d.success) {
