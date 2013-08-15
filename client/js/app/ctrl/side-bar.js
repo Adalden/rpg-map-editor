@@ -1,6 +1,6 @@
-/* global angular */
+/* global angular, _ */
 angular.module('editor').controller('sideBarCtrl',
-  function ($scope, map, tools, defaults) {
+  function ($scope, $rootScope, map, tools, defaults) {
     'use strict';
 
     $scope.map = map;
@@ -35,6 +35,38 @@ angular.module('editor').controller('sideBarCtrl',
       str += 'height:' + ts + 'px;';
 
       return str;
+    };
+
+    $scope.addRow = function () {
+      _.each(map.data, function (row) {
+        row.push(tools.defaultTile);
+      });
+      ++map.height;
+      $rootScope.$emit('mapChanged');
+    };
+
+    $scope.removeRow = function () {
+      _.each(map.data, function (row) {
+        --row.length;
+      });
+      --map.height;
+      $rootScope.$emit('mapChanged');
+    };
+
+    $scope.addColumn = function () {
+      var tmp = [];
+      for (var i = 0; i < map.height; ++i) {
+        tmp.push(tools.defaultTile);
+      }
+      map.data.push(tmp);
+      ++map.width;
+      $rootScope.$emit('mapChanged');
+    };
+
+    $scope.removeColumn = function () {
+      --map.data.length;
+      --map.width;
+      $rootScope.$emit('mapChanged');
     };
   }
 );

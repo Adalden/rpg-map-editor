@@ -11,10 +11,10 @@
   <tab heading="Events"></tab>
   <tab heading="Properties">
     <label>Width: {{map.width}} columns</label>
-    <button class="btn">-</button>
-    <button class="btn">+</button>
+    <button class="btn" ng-click="removeColumn()">-</button>
+    <button class="btn" ng-click="addColumn()">+</button>
     <label>Height: {{map.height}} rows</label>
-    <button class="btn">-</button>
-    <button class="btn">+</button>
+    <button class="btn" ng-click="removeRow()">-</button>
+    <button class="btn" ng-click="addRow()">+</button>
   </tab>
 </tabset>
