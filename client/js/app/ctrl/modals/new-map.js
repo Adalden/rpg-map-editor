@@ -1,6 +1,6 @@
 /* global angular */
 angular.module('editor').controller('newMapCtrl',
-  function ($scope, $rootScope, dialog, map) {
+  function ($scope, $rootScope, dialog, map, tools) {
     'use strict';
 
     $scope.name = 'untitled map';
@@ -20,14 +20,14 @@ angular.module('editor').controller('newMapCtrl',
 
     $scope.accept = function (name, width, height, tile) {
       if ($scope.validate(name, width, height)) {
-        // TODO:: Display An Error Message Right Here
         return;
       }
 
       map.title = name;
       map.width = width;
       map.height = height;
-      map.new(tile);
+      tools.defaultTile = tile;
+      map.new();
       $rootScope.$emit('mapChanged');
       dialog.close();
     };

@@ -7,7 +7,7 @@ angular.module('editor').factory('tools',
       curTile: 0,
       curTile2: 0,
       showGrid: false,
-      defaultTile: 9
+      backgroundTile: 9
     };
   }
 );

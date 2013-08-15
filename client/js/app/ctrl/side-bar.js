@@ -39,7 +39,7 @@ angular.module('editor').controller('sideBarCtrl',
 
     $scope.addRow = function () {
       _.each(map.data, function (row) {
-        row.push(tools.defaultTile);
+        row.push(tools.backgroundTile);
       });
       ++map.height;
       $rootScope.$emit('mapChanged');
@@ -56,7 +56,7 @@ angular.module('editor').controller('sideBarCtrl',
     $scope.addColumn = function () {
       var tmp = [];
       for (var i = 0; i < map.height; ++i) {
-        tmp.push(tools.defaultTile);
+        tmp.push(tools.backgroundTile);
       }
       map.data.push(tmp);
       ++map.width;

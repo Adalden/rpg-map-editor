@@ -1,12 +1,10 @@
 /* global angular */
 angular.module('editor').factory('map',
-  function () {
+  function (tools) {
     'use strict';
 
-    function newMap(t) {
-      if (t === undefined || isNaN(parseInt(t, 10))) {
-        t = 9;
-      }
+    function newMap() {
+      var t = tools.backgroundTile;
       obj.data = [];
       for (var i = 0; i < obj.width; ++i) {
         var arr = [];
