@@ -1,13 +1,15 @@
 /* global angular */
 angular.module('editor').factory('tools',
-  function () {
+  function (defaults) {
     'use strict';
 
     return {
-      curTile: 0,
-      curTile2: 0,
-      showGrid: false,
-      backgroundTile: 9
+      leftTile: defaults.leftTile,
+      leftLayer: defaults.leftLayer,
+      rightTile: defaults.rightTile,
+      rightLayer: defaults.rightLayer,
+      showGrid: defaults.showGrid,
+      backgroundTile: defaults.backgroundTile
     };
   }
 );

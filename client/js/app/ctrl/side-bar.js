@@ -5,28 +5,31 @@ angular.module('editor').controller('sideBarCtrl',
 
     $scope.map = map;
     $scope.tools = tools;
+    $scope.envs = defaults.mapEnvs;
+    $scope.curLayer = 'bottom';
 
-    $scope.choseTile = function (newTile) {
-      tools.curTile = newTile;
+    var cols = defaults.tileCols;
+    var ts = defaults.tileSize;
+
+    $scope.choseTile = function (which, newTile, newLayer) {
+      tools[which + 'Tile'] = newTile;
+      tools[which + 'Layer'] = newLayer;
     };
 
-    $scope.choseTile2 = function (newTile) {
-      tools.curTile2 = newTile;
-    };
-
-    $scope.getNumber = function () {
+    $scope.getNumber = function (layer) {
       var arr = [];
-      for (var i = 0; i < defaults.numTiles; ++i) {
+      for (var i = 0; i < defaults[layer + 'Num']; ++i) {
         arr.push(i);
       }
       return arr;
     };
 
-    $scope.getStyle = function (num) {
-      var url = defaults.tileUrl;
-      var cols = defaults.tileCols;
-      var ts = defaults.tileSize;
+    $scope.getSelected = function () {
+      return $scope.num==$scope.tools.leftTile || $scope.num==$scope.tools.rightTile
+    }
 
+    $scope.getStyle = function (num, layer) {
+      var url = defaults[layer + 'Url'];
       var x = (num % cols) * ts;
       var y = Math.floor(num / cols) * ts;
 

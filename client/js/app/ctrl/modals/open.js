@@ -14,7 +14,11 @@ angular.module('editor').controller('openCtrl',
         map.width = m.width;
         map.height = m.height;
         map.data = m.data;
+        map.events = m.events;
+        map.env = m.env;
+
         map._id = m._id;
+
         $rootScope.$emit('mapChanged');
         dialog.close();
       });

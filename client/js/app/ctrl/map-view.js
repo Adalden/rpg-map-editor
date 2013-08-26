@@ -7,6 +7,10 @@ angular.module('editor').controller('mapViewCtrl',
     $scope.defaults = defaults;
     $scope.tools = tools;
 
+    var ts = defaults.tileSize;
+    var cols = defaults.tileCols;
+    var layers = ['bottom', 'middle', 'top']
+
     $scope.mouseMove = function (e) {
       if (e.which === 1) {
         placeTile(e);
@@ -18,7 +22,6 @@ angular.module('editor').controller('mapViewCtrl',
     };
 
     $scope.click = function (e) {
-      e.preventDefault();
       if (e.which === 1) {
         placeTile(e);
       }
@@ -32,54 +35,63 @@ angular.module('editor').controller('mapViewCtrl',
       var x = e.offsetX;
       var y = e.offsetY;
 
-      var tileX = Math.floor(x / defaults.tileSize);
-      var tileY = Math.floor(y / defaults.tileSize);
+      var tileX = Math.floor(x / ts);
+      var tileY = Math.floor(y / ts);
 
-      var tileNum = (e.which === 1) ? tools.curTile : tools.curTile2;
-      map.data[tileX][tileY] = tileNum;
-
-      $rootScope.$emit('mapChanged');
+      if (e.which === 1) {
+        map.data[tools.leftLayer][tileX][tileY] = tools.leftTile;
+        $rootScope.$emit('mapChanged', tools.leftLayer);
+      }
+      else {
+        map.data[tools.rightLayer][tileX][tileY] = tools.rightTile;
+        $rootScope.$emit('mapChanged', tools.rightLayer);
+      }
     }
 
-    $rootScope.$on('mapChanged', redrawCanvas);
+    $rootScope.$on('mapChanged', redrawCanvi);
 
-    function redrawCanvas() {
+    function redrawCanvi(e, layer) {
       $timeout(
         function () {
-          prepGrid();
-          var canvas = document.getElementById('map');
-          var ctx = canvas.getContext('2d');
-          var ts = defaults.tileSize;
-
-          for (var i = 0; i < map.data.length; ++i) {
-            for (var j = 0; j < map.data[i].length; ++j) {
-              drawImage(ctx, map.data[i][j], i, j, ts);
-            }
+          if (layer) {
+            redrawCanvas(layer);
+          }
+          else {
+            _.each(layers, function (layer) {
+              redrawCanvas(layer);
+            });
+            drawGrid();
           }
         }
       );
     }
 
-    function drawImage(ctx, tileNum, x, y, ts) {
-      var cols = defaults.tileCols;
-      var sx = tileNum % cols;
-      var sy = Math.floor(tileNum / cols);
-      ctx.drawImage(img, sx * ts, sy * ts, ts, ts, x * ts, y * ts, ts, ts);
+    function redrawCanvas(layer) {
+      $timeout(
+        function () {
+          var canvas = document.getElementById(layer);
+          var ctx = canvas.getContext('2d');
+
+          ctx.clearRect(0, 0, map.width * ts, map.height * ts);
+
+          _.each(map.data[layer], function (row, i) {
+            _.each(row, function (cell, j) {
+              drawImage(ctx, cell, i, j, layer);
+            });
+          });
+        }
+      );
     }
 
-    var img = new Image();
-    img.onload = function () {
-      map.new();
-      $rootScope.$emit('mapChanged');
-    };
-    img.src = defaults.tileUrl;
+    function drawImage(ctx, tileNum, x, y, layer) {
+      var sx = tileNum % cols;
+      var sy = Math.floor(tileNum / cols);
+      ctx.drawImage(imgs[layer], sx * ts, sy * ts, ts, ts, x * ts, y * ts, ts, ts);
+    }
 
-    prepGrid();
-
-    function prepGrid() {
+    function drawGrid() {
       var canvas = document.getElementById('grid');
       var ctx = canvas.getContext('2d');
-      var ts = defaults.tileSize;
 
       for (var i = 0; i < map.width; ++i) {
         for (var j = 0; j < map.height; ++j) {
@@ -88,5 +100,16 @@ angular.module('editor').controller('mapViewCtrl',
         }
       }
     }
+
+    var imgs = {};
+    _.each(layers, function (layer) {
+      imgs[layer] = new Image();
+      imgs[layer].onload = function () {
+        $rootScope.$emit('mapChanged', layer);
+      };
+      imgs[layer].src = defaults[layer + 'Url'];
+    });
+
+    map.new();
   }
 );

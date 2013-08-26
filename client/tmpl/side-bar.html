@@ -1,20 +1,46 @@
 <tabset>
   <tab heading="Tiles">
+    <div>
+      <span class="disp-label">Left Click:</span>
+      <div class="disp-tile-box">
+        <div class="disp-tile" style="{{getStyle(tools.leftTile, tools.leftLayer)}}"></div>
+        <div>{{tools.leftLayer}}</div>
+      </div>
+
+      <span class="disp-label">Right Click:</span>
+      <div class="disp-tile-box">
+        <div class="disp-tile" style="{{getStyle(tools.rightTile, tools.rightLayer)}}"></div>
+        <div>{{tools.rightLayer}}</div>
+      </div>
+    </div>
+
+    <div style="margin: 20px 0;text-align:center">
+      <div class="btn-group">
+        <button type="button" class="btn" ng-model="curLayer" btn-radio="'bottom'">Bottom</button>
+        <button type="button" class="btn" ng-model="curLayer" btn-radio="'middle'">Middle</button>
+        <button type="button" class="btn" ng-model="curLayer" btn-radio="'top'">Top</button>
+      </div>
+    </div>
+
     <div
       class="tile"
-      ng-class="{selected:num==tools.curTile || num==tools.curTile2}"
-      ng-click="choseTile(num)"
-      ng-right-click="choseTile2(num)"
-      style="{{getStyle(num)}}"
-      ng-repeat="num in getNumber()"></div>
+      ng-class="{selected:(num==tools.leftTile&&curLayer==tools.leftLayer)||(num==tools.rightTile&&curLayer==tools.rightLayer)}"
+      ng-click="choseTile('left', num, curLayer)"
+      ng-right-click="choseTile('right', num, curLayer)"
+      style="{{getStyle(num, curLayer)}}"
+      ng-repeat="num in getNumber(curLayer)"></div>
   </tab>
   <tab heading="Events"></tab>
   <tab heading="Properties">
     <label>Width: {{map.width}} columns</label>
     <button class="btn" ng-click="removeColumn()">-</button>
     <button class="btn" ng-click="addColumn()">+</button>
+
     <label>Height: {{map.height}} rows</label>
     <button class="btn" ng-click="removeRow()">-</button>
     <button class="btn" ng-click="addRow()">+</button>
+
+    <label>Map Type:</label>
+    <select ng-options="e for e in envs" ng-model="map.env"></select>
   </tab>
 </tabset>

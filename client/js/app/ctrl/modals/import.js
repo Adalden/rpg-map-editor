@@ -13,6 +13,9 @@ angular.module('editor').controller('importCtrl',
       map.width = temp.width || defaults.mapWidth;
       map.height = temp.height || defaults.mapHeight;
       map.data = temp.data;
+      map.events = temp.events;
+      map.env = temp.env || defaults.mapEnv;
+
       $rootScope.$emit('mapChanged');
       dialog.close();
     };

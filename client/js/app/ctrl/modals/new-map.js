@@ -1,24 +1,23 @@
 /* global angular */
 angular.module('editor').controller('newMapCtrl',
-  function ($scope, $rootScope, dialog, map, tools) {
+  function ($scope, $rootScope, dialog, map, tools, defaults) {
     'use strict';
 
-    $scope.name = 'untitled map';
-    $scope.width = 15;
-    $scope.height = 15;
+    $scope.name = defaults.mapName;
+    $scope.width = defaults.mapWidth;
+    $scope.height = defaults.mapHeight;
 
-    $scope.tiles = [
-      { name: 'dirt', id: 9 },
-      { name: 'rock', id: 33 },
-      { name: 'grass', id: 35 }
-    ];
+    $scope.tiles = defaults.backgroundTiles;
     $scope.tile = $scope.tiles[0];
+
+    $scope.envs = defaults.mapEnvs;
+    $scope.env = $scope.envs[0];
 
     $scope.close = function () {
       dialog.close();
     };
 
-    $scope.accept = function (name, width, height, tile) {
+    $scope.accept = function (name, width, height, tile, env) {
       if ($scope.validate(name, width, height)) {
         return;
       }
@@ -26,7 +25,10 @@ angular.module('editor').controller('newMapCtrl',
       map.title = name;
       map.width = width;
       map.height = height;
-      tools.defaultTile = tile;
+      map.env = env;
+
+      tools.backgroundTile = tile;
+
       map.new();
       $rootScope.$emit('mapChanged');
       dialog.close();
