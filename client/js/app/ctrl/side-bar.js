@@ -41,7 +41,7 @@ angular.module('editor').controller('sideBarCtrl',
     };
 
     $scope.addRow = function () {
-      _.each(map.data, function (row) {
+      _.each(map.data.bottom, function (row) {
         row.push(tools.backgroundTile);
       });
       ++map.height;
@@ -49,8 +49,12 @@ angular.module('editor').controller('sideBarCtrl',
     };
 
     $scope.removeRow = function () {
-      _.each(map.data, function (row) {
-        --row.length;
+      _.each(map.data, function (layer) {
+        _.each(layer, function (row) {
+          if (row.length === map.height) {
+            --row.length;
+          }
+        });
       });
       --map.height;
       $rootScope.$emit('mapChanged');
@@ -61,13 +65,17 @@ angular.module('editor').controller('sideBarCtrl',
       for (var i = 0; i < map.height; ++i) {
         tmp.push(tools.backgroundTile);
       }
-      map.data.push(tmp);
+      map.data.bottom.push(tmp);
+      map.data.middle.push([]);
+      map.data.top.push([]);
       ++map.width;
       $rootScope.$emit('mapChanged');
     };
 
     $scope.removeColumn = function () {
-      --map.data.length;
+      _.each(map.data, function (layer) {
+        --layer.length
+      });
       --map.width;
       $rootScope.$emit('mapChanged');
     };
