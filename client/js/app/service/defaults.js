@@ -6,13 +6,13 @@ angular.module('editor').factory('defaults',
     return {
 
       // tiles
-      tileSize: 48,
+      tileSize: 40,
       tileCols: 8,
 
-      bottomUrl: 'img/bottom.jpg',
-      bottomNum: 96,
+      bottomUrl: 'img/bottom.png',
+      bottomNum: 48,
       middleUrl: 'img/middle.png',
-      middleNum: 96,
+      middleNum: 56,
       topUrl: 'img/top.png',
       topNum: 96,
 
@@ -31,9 +31,10 @@ angular.module('editor').factory('defaults',
       showGrid: false,
       backgroundTile: 9,
       backgroundTiles: [
-        { name: 'dirt', id: 9 },
+        { name: 'stone', id: 9 },
         { name: 'rock', id: 33 },
-        { name: 'grass', id: 35 }
+        { name: 'grass', id: 22 },
+        { name: 'wood', id: 7 }
       ]
     };
   }

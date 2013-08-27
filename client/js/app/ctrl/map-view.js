@@ -111,5 +111,8 @@ angular.module('editor').controller('mapViewCtrl',
     });
 
     map.new();
+    $timeout(function () {
+      drawGrid();
+    });
   }
 );

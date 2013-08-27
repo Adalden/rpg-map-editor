@@ -14,7 +14,7 @@
   <canvas id="grid"
     width="{{map.width*defaults.tileSize}}"
     height="{{map.height*defaults.tileSize}}"
-    ng-class="{'hide-me':!tools.showGrid}"></canvas>
+    ng-show="tools.showGrid"></canvas>
 
   <canvas id="clickLayer"
     width="{{map.width*defaults.tileSize}}"
