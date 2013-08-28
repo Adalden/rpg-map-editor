@@ -19,7 +19,59 @@ angular.module('editor').controller('mapViewCtrl',
       if (e.which === 3) {
         placeTile(e, true);
       }
+
+      drawHover(e);
     };
+
+    $scope.mouseLeave = function () {
+      var canvas = document.getElementById('hover');
+      var ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, map.width * ts, map.height * ts);
+    };
+
+    function drawHover(e) {
+      var x = e.offsetX;
+      var y = e.offsetY;
+
+      x = Math.floor(x / ts);
+      y = Math.floor(y / ts);
+
+
+      var layer = tools.leftLayer;
+      var tileNum = tools.leftTile;
+
+      var canvas = document.getElementById('hover');
+      var ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, map.width * ts, map.height * ts);
+
+      var sx = tileNum % cols;
+      var sy = Math.floor(tileNum / cols);
+
+      if (layer == 'events' && tileNum == 'rock') {
+        tempDraw2(ctx, x-1, y-1, 0 , [1, 8, 9],   [], []);
+        tempDraw2(ctx, x  , y-1, 1 , [9, 3, 4],   [8, 10], [3, 4]);
+        tempDraw2(ctx, x+1, y-1, 2 , [1, 10, 9],  [], []);
+
+        tempDraw2(ctx, x-1, y  , 8 , [9],         [], []);
+        tempDraw2(ctx, x  , y  , 9 , [],          [], []);
+        tempDraw2(ctx, x+1, y  , 10, [9],         [], []);
+
+        tempDraw2(ctx, x-1, y+1, 16, [17, 8, 9],  [], []);
+        tempDraw2(ctx, x  , y+1, 17, [9],         [], []);
+        tempDraw2(ctx, x+1, y+1, 18, [17, 10, 9], [], []);
+        return;
+      }
+
+      if (layer == 'events') {
+        sx = 0;
+        sy = tileNum.id;
+
+      }
+
+      ctx.globalAlpha = 0.7;
+      ctx.drawImage(imgs[layer], sx * ts, sy * ts, ts, ts, x * ts, y * ts, ts, ts);
+      ctx.globalAlpha = 1.0;
+    }
 
     $scope.click = function (e) {
       if (e.which === 1) {
@@ -56,13 +108,12 @@ angular.module('editor').controller('mapViewCtrl',
           if (parseInt(e.x, 10) === x && parseInt(e.y, 10) === y) {
             map.events = _.without(map.events, e);
             $rootScope.$emit('mapChanged', 'events');
-            return;
           }
         });
       }
       else if (id === 'rock') {
         tempDraw(x-1, y-1, 0 , [1, 8, 9],   [], []);
-        tempDraw(x  , y-1, 1 , [9],         [8, 10, 3, 4], [3, 4, 3, 4]);
+        tempDraw(x  , y-1, 1 , [9, 3, 4],   [8, 10], [3, 4]);
         tempDraw(x+1, y-1, 2 , [1, 10, 9],  [], []);
 
         tempDraw(x-1, y  , 8 , [9],         [], []);
@@ -108,6 +159,34 @@ angular.module('editor').controller('mapViewCtrl',
       });
 
       map.data.bottom[x][y] = i;
+    }
+
+
+    function tempDraw2(ctx, x, y, i, arr, arr2, arr3) {
+      if (x < 0 || x >= map.width) return;
+      if (y < 0 || y >= map.height) return;
+
+      var shouldBreak = false;
+      _.each(arr, function (num) {
+        if (map.data.bottom[x][y] == num) {
+          shouldBreak = true;
+        }
+      });
+      if (shouldBreak) return;
+
+      _.each(arr2, function (num, index) {
+        if (map.data.bottom[x][y] == num) {
+          i = arr3[index];
+        }
+      });
+
+
+      var sx = i % cols;
+      var sy = Math.floor(i / cols);
+
+      ctx.globalAlpha = 0.7;
+      ctx.drawImage(imgs.bottom, sx * ts, sy * ts, ts, ts, x * ts, y * ts, ts, ts);
+      ctx.globalAlpha = 1.0;
     }
 
     $rootScope.$on('mapChanged', redrawCanvi);

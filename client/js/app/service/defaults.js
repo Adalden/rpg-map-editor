@@ -34,7 +34,7 @@ angular.module('editor').factory('defaults',
       rightTile: 0,
       rightLayer: 'bottom',
       showGrid: false,
-      backgroundTile: 9,
+      backgroundTile: 22,
       backgroundTiles: [
         { name: 'stone', id: 9 },
         { name: 'rock',  id: 33 },

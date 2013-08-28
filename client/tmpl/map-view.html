@@ -15,6 +15,10 @@
     width="{{map.width*defaults.tileSize}}"
     height="{{map.height*defaults.tileSize}}"></canvas>
 
+  <canvas id="hover"
+    width="{{map.width*defaults.tileSize}}"
+    height="{{map.height*defaults.tileSize}}"></canvas>
+
   <canvas id="grid"
     width="{{map.width*defaults.tileSize}}"
     height="{{map.height*defaults.tileSize}}"
@@ -24,6 +28,7 @@
     width="{{map.width*defaults.tileSize}}"
     height="{{map.height*defaults.tileSize}}"
     ng-mousemove="mouseMove($event)"
+    ng-mouseleave="mouseLeave($event)"
     ng-click="click($event)"
     ng-right-click="rightClick($event)"></canvas>
 </div>
