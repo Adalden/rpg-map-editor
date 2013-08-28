@@ -1,0 +1,28 @@
+<form class="form-fix">
+  <div class="modal-header">
+    <h3>New Event</h3>
+  </div>
+
+  <div class="modal-body">
+    <label><h4>Type:</h4></label>
+    <select ng-model="type" ng-options="t.name for t in types"></select>
+
+    <div ng-repeat="prop in type.props">
+      <label>{{prop}}</label>
+      <input type="text" ng-model="result.e[prop]">
+    </div>
+
+    <label><h4>Trigger:</h4></label>
+    <select ng-model="trigger" ng-options="t.name for t in triggers"></select>
+
+    <div ng-repeat="prop in trigger.props">
+      <label>{{prop}}</label>
+      <input type="text" ng-model="result.t[prop]">
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <input type="button" class="btn" ng-click="close()" value="Cancel">
+    <input type="submit" class="btn btn-success" ng-click="create(type, trigger, result)" value="Create New Event">
+  </div>
+</form>

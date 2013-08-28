@@ -18,6 +18,11 @@ mainMenu = [
         state: 'index.signUp',
         tmpl: 'tmpl/modals/sign-up.html',
         ctrl: 'signUpCtrl'
+      },
+      {
+        state: 'index.newEvent',
+        tmpl: 'tmpl/modals/new-event.html',
+        ctrl: 'newEventCtrl'
       }
     ]
   },

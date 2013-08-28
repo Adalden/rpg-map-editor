@@ -1,4 +1,4 @@
-/* global angular */
+/* global angular, _ */
 angular.module('editor').controller('mapViewCtrl',
   function ($rootScope, $scope, $timeout, map, tools, defaults) {
     'use strict';
@@ -9,7 +9,7 @@ angular.module('editor').controller('mapViewCtrl',
 
     var ts = defaults.tileSize;
     var cols = defaults.tileCols;
-    var layers = ['bottom', 'middle', 'top']
+    var layers = ['bottom', 'middle', 'top', 'events'];
 
     $scope.mouseMove = function (e) {
       if (e.which === 1) {
@@ -71,8 +71,9 @@ angular.module('editor').controller('mapViewCtrl',
         function () {
           var canvas = document.getElementById(layer);
           var ctx = canvas.getContext('2d');
-
           ctx.clearRect(0, 0, map.width * ts, map.height * ts);
+
+          if (layer === 'events') return drawEvents(ctx);
 
           _.each(map.data[layer], function (row, i) {
             _.each(row, function (cell, j) {
@@ -81,6 +82,22 @@ angular.module('editor').controller('mapViewCtrl',
           });
         }
       );
+    }
+
+    function drawEvents(ctx) {
+      _.each(map.events, function (e) {
+        if ('id' in e) {
+          var x = parseInt(e.x, 10) || 0;
+          var y = parseInt(e.y, 10) || 0;
+          drawEvent(ctx, e.id, x, y, 'events');
+        }
+      });
+    }
+
+    // THIS ONLY EXISTS CUZ I MADE THE EVENTS WRONG, IT SHOULD BE HORIZONTAL
+    function drawEvent(ctx, tileNum, x, y, layer) {
+      var sy = tileNum;
+      ctx.drawImage(imgs[layer], 0, sy * ts, ts, ts, x * ts, y * ts, ts, ts);
     }
 
     function drawImage(ctx, tileNum, x, y, layer) {

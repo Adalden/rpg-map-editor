@@ -30,7 +30,9 @@ angular.module('editor').factory('openSave',
         title: map.title,
         width: map.width,
         height: map.height,
-        data: map.data
+        data: map.data,
+        events: map.events,
+        env: map.env
       };
 
       $http.post('/map', obj).then(
@@ -49,7 +51,9 @@ angular.module('editor').factory('openSave',
         title: map.title,
         width: map.width,
         height: map.height,
-        data: map.data
+        data: map.data,
+        events: map.events,
+        env: map.env
       };
 
       $http.put('/map', obj).then(

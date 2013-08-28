@@ -30,8 +30,27 @@
       style="{{getStyle(num, curLayer)}}"
       ng-repeat="num in getNumber(curLayer)"></div>
   </tab>
+
+
+
+
+  <tab heading="Events">
+    <button class="btn btn-success" ng-click="goToNewEvent()">New Event</button>
+    <span class="delete-event" ng-click="aoeu = !aoeu" ng-class="{selected:aoeu}">X</span>
+    <div class="event-obj" ng-repeat="e in map.events">
+      <span>{{e.name}}</span>
+      <span ng-show="e.x && e.y">({{e.x}}, {{e.y}})</span>
+      </div>
+  </tab>
+
+
+
+
   <tab heading="Objects"></tab>
-  <tab heading="Events"></tab>
+
+
+
+
   <tab heading="Properties">
     <label>Width: {{map.width}} columns</label>
     <button class="btn" ng-click="removeColumn()">-</button>

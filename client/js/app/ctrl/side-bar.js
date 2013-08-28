@@ -1,6 +1,6 @@
 /* global angular, _ */
 angular.module('editor').controller('sideBarCtrl',
-  function ($scope, $rootScope, map, tools, defaults) {
+  function ($scope, $rootScope, $state, map, tools, defaults) {
     'use strict';
 
     $scope.map = map;
@@ -10,6 +10,8 @@ angular.module('editor').controller('sideBarCtrl',
 
     var cols = defaults.tileCols;
     var ts = defaults.tileSize;
+
+    // +-+ Tile Methods +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ \\
 
     $scope.choseTile = function (which, newTile, newLayer) {
       tools[which + 'Tile'] = newTile;
@@ -24,10 +26,6 @@ angular.module('editor').controller('sideBarCtrl',
       return arr;
     };
 
-    $scope.getSelected = function () {
-      return $scope.num==$scope.tools.leftTile || $scope.num==$scope.tools.rightTile
-    }
-
     $scope.getStyle = function (num, layer) {
       var url = defaults[layer + 'Url'];
       var x = (num % cols) * ts;
@@ -39,6 +37,21 @@ angular.module('editor').controller('sideBarCtrl',
 
       return str;
     };
+
+
+    // +-+ Event Methods +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ \\
+
+    $scope.goToNewEvent = function () {
+      $state.transitionTo('index.newEvent');
+    };
+
+    // +-+ Object Methods +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ \\
+
+
+
+
+
+    // +-+ Property Methods +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ \\
 
     $scope.addRow = function () {
       _.each(map.data.bottom, function (row) {
@@ -74,7 +87,7 @@ angular.module('editor').controller('sideBarCtrl',
 
     $scope.removeColumn = function () {
       _.each(map.data, function (layer) {
-        --layer.length
+        --layer.length;
       });
       --map.width;
       $rootScope.$emit('mapChanged');

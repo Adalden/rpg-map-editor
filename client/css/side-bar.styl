@@ -30,3 +30,32 @@
 
     .disp-tile
       border: 2px solid blue
+
+  .event-obj
+    background-color: #ccc
+    padding: 10px 5px
+    border-top: 1px solid
+
+    &:first-of-type
+      margin-top: 20px
+      border-top: none
+
+    &:hover
+      background-color: #999
+      cursor: pointer
+
+  .delete-event
+    color: red
+    font-weight: bold
+    background-color: #ccc
+    padding: 7px 10px
+    border-radius: 10px
+    border: 2px solid transparent
+
+    &:hover
+      background-color: #aaa
+      cursor: pointer
+
+    &.selected
+      border: 2px solid black
+
