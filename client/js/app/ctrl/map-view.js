@@ -40,7 +40,7 @@ angular.module('editor').controller('mapViewCtrl',
       var tileY = Math.floor(y / ts);
 
       if (tools[which + 'Layer'] === 'events') {
-        if (!moving) {
+        if (!moving || tools[which + 'Tile']=='rock') {
           performEvent(tileX, tileY, tools[which + 'Tile']);
         }
         return;
@@ -60,8 +60,20 @@ angular.module('editor').controller('mapViewCtrl',
           }
         });
       }
-      else if (id === 'something') {
+      else if (id === 'rock') {
+        tempDraw(x-1, y-1, 0 , [1, 8, 9],   [], []);
+        tempDraw(x  , y-1, 1 , [9],         [8, 10, 3, 4], [3, 4, 3, 4]);
+        tempDraw(x+1, y-1, 2 , [1, 10, 9],  [], []);
 
+        tempDraw(x-1, y  , 8 , [9],         [], []);
+        tempDraw(x  , y  , 9 , [],          [], []);
+        tempDraw(x+1, y  , 10, [9],         [], []);
+
+        tempDraw(x-1, y+1, 16, [17, 8, 9],  [], []);
+        tempDraw(x  , y+1, 17, [9],         [], []);
+        tempDraw(x+1, y+1, 18, [17, 10, 9], [], []);
+
+        $rootScope.$emit('mapChanged', 'bottom');
       }
       else {
         var obj = {
@@ -75,6 +87,27 @@ angular.module('editor').controller('mapViewCtrl',
         map.events.push(obj);
         $rootScope.$emit('mapChanged', 'events');
       }
+    }
+
+    function tempDraw(x, y, i, arr, arr2, arr3) {
+      if (x < 0 || x >= map.width) return;
+      if (y < 0 || y >= map.height) return;
+
+      var shouldBreak = false;
+      _.each(arr, function (num) {
+        if (map.data.bottom[x][y] == num) {
+          shouldBreak = true;
+        }
+      });
+      if (shouldBreak) return;
+
+      _.each(arr2, function (num, index) {
+        if (map.data.bottom[x][y] == num) {
+          i = arr3[index];
+        }
+      });
+
+      map.data.bottom[x][y] = i;
     }
 
     $rootScope.$on('mapChanged', redrawCanvi);
