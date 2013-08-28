@@ -36,7 +36,13 @@
 
   <tab heading="Events">
     <button class="btn btn-success" ng-click="goToNewEvent()">New Event</button>
-    <span class="delete-event" ng-click="aoeu = !aoeu" ng-class="{selected:aoeu}">X</span>
+
+    <span
+      ng-click="choseTile('left', 'delete', 'events')"
+      ng-right-click="choseTile('right', 'delete', 'events')"
+      ng-class="{selected:('delete'==tools.leftTile&&'events'==tools.leftLayer)||('delete'==tools.rightTile&&'events'==tools.rightLayer)}"
+      class="delete-event">X</span>
+
     <div class="event-obj" ng-repeat="e in map.events">
       <span>{{e.name}}</span>
       <span ng-show="e.x && e.y">({{e.x}}, {{e.y}})</span>
@@ -46,7 +52,21 @@
 
 
 
-  <tab heading="Objects"></tab>
+  <tab heading="Objects">
+
+    <label>Events:</label>
+    <div
+      class="tile"
+      ng-class="{selected:(e==tools.leftTile&&'events'==tools.leftLayer)||(e==tools.rightTile&&'events'==tools.rightLayer)}"
+      ng-repeat="e in eventOptions"
+      ng-right-click="choseEvent('right', e)"
+      ng-click="choseEvent('left', e)"
+      style="{{getEStyle(e)}}"></div>
+
+    <label>Paths:</label>
+    <div>Not Implemented Yet</div>
+
+  </tab>
 
 
 

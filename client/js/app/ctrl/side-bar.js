@@ -6,6 +6,7 @@ angular.module('editor').controller('sideBarCtrl',
     $scope.map = map;
     $scope.tools = tools;
     $scope.envs = defaults.mapEnvs;
+    $scope.eventOptions = defaults.types;
     $scope.curLayer = 'bottom';
 
     var cols = defaults.tileCols;
@@ -38,7 +39,6 @@ angular.module('editor').controller('sideBarCtrl',
       return str;
     };
 
-
     // +-+ Event Methods +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ \\
 
     $scope.goToNewEvent = function () {
@@ -46,6 +46,25 @@ angular.module('editor').controller('sideBarCtrl',
     };
 
     // +-+ Object Methods +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ \\
+
+    $scope.choseEvent = function (which, e) {
+      tools[which + 'Layer'] = 'events';
+      tools[which + 'Tile'] = e;
+    };
+
+    $scope.getEStyle = function (e) {
+      var url = defaults.eventsUrl;
+      var x = 0;
+      var y = e.id * ts;
+
+      var str = 'background:url(' + url + ') ' + -x + 'px ' + -y + 'px;';
+      str += 'width:' + ts + 'px;';
+      str += 'height:' + ts + 'px;';
+
+      return str;
+    };
+
+
 
 
 

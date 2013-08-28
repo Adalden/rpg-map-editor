@@ -108,6 +108,7 @@ function getCouchUser(user, cb) {
   request(url + '/_design/_views/_view/user?key="' + user + '"',
     function (err, resp, body) {
       body = JSON.parse(body);
+      body.rows = body.rows || [];
       cb(body.rows[0]);
     }
   );

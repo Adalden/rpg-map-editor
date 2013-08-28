@@ -13,11 +13,11 @@ angular.module('editor').controller('mapViewCtrl',
 
     $scope.mouseMove = function (e) {
       if (e.which === 1) {
-        placeTile(e);
+        placeTile(e, true);
       }
 
       if (e.which === 3) {
-        placeTile(e);
+        placeTile(e, true);
       }
     };
 
@@ -31,20 +31,49 @@ angular.module('editor').controller('mapViewCtrl',
       placeTile(e);
     };
 
-    function placeTile(e) {
+    function placeTile(e, moving) {
       var x = e.offsetX;
       var y = e.offsetY;
+      var which = e.which === 1 ? 'left' : 'right';
 
       var tileX = Math.floor(x / ts);
       var tileY = Math.floor(y / ts);
 
-      if (e.which === 1) {
-        map.data[tools.leftLayer][tileX][tileY] = tools.leftTile;
-        $rootScope.$emit('mapChanged', tools.leftLayer);
+      if (tools[which + 'Layer'] === 'events') {
+        if (!moving) {
+          performEvent(tileX, tileY, tools[which + 'Tile']);
+        }
+        return;
+      }
+
+      map.data[tools[which + 'Layer']][tileX][tileY] = tools[which + 'Tile'];
+      $rootScope.$emit('mapChanged', tools[which + 'Layer']);
+    }
+
+    function performEvent(x, y, id) {
+      if (id === 'delete') {
+        _.each(map.events, function (e) {
+          if (parseInt(e.x, 10) === x && parseInt(e.y, 10) === y) {
+            map.events = _.without(map.events, e);
+            $rootScope.$emit('mapChanged', 'events');
+            return;
+          }
+        });
+      }
+      else if (id === 'something') {
+
       }
       else {
-        map.data[tools.rightLayer][tileX][tileY] = tools.rightTile;
-        $rootScope.$emit('mapChanged', tools.rightLayer);
+        var obj = {
+          name: id.name,
+          type: id.type,
+          id: id.id,
+          x: x,
+          y: y
+        };
+
+        map.events.push(obj);
+        $rootScope.$emit('mapChanged', 'events');
       }
     }
 
