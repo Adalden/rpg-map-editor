@@ -7,5 +7,6 @@ module.exports = {
       maps: 'rpg_maps',
       users: 'rpg_users'
     }
-  }
+  },
+  gameUrl: 'http://localhost:4000/map'
 };

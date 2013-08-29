@@ -1,5 +1,6 @@
 /* jshint node:true, strict:false */
-var request = require('request');
+var request = require('request'),
+    gameUrl = require('config').gameUrl;
 
 module.exports = function (app) {
   app.post('/sendMap', sendMap);
@@ -9,7 +10,7 @@ function sendMap(req, res) {
   var map = req.body;
 
   request({
-    url: 'http://localhost:4000/map',
+    url: gameUrl,
     method: 'POST',
     json: map
   }, function (err, resp, body) {
