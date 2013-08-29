@@ -1,6 +1,6 @@
 /* global angular */
 angular.module('editor').controller('headerCtrl',
-  function ($scope, $rootScope, $state, map, menu, tools, user) {
+  function ($scope, $rootScope, $http, $state, map, menu, tools, user) {
     'use strict';
 
     $scope.map = map;
@@ -22,6 +22,18 @@ angular.module('editor').controller('headerCtrl',
     function toggleGrid() {
       tools.showGrid = !tools.showGrid;
     }
+
+    $scope.simulateMap = function () {
+      $http.post('/sendMap', { map: map }).then(
+        function (resp) {
+          console.log(resp.data);
+          window.open(resp.data.url, '_blank');
+        },
+        function (err) {
+          console.error(err);
+        }
+      );
+    };
 
     var funcs = {
       grid: toggleGrid
