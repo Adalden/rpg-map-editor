@@ -53,7 +53,6 @@
 
 
   <tab heading="Objects">
-
     <label>Events:</label>
     <div
       class="tile"
@@ -72,7 +71,6 @@
       ng-right-click="choseTile('right', 'rock', 'events')"
       style="{{getStyle(9, 'bottom')}}"
       class="tile"></div>
-
   </tab>
 
 
@@ -86,6 +84,12 @@
     <label>Height: {{map.height}} rows</label>
     <button class="btn" ng-click="removeRow()">-</button>
     <button class="btn" ng-click="addRow()">+</button>
+
+    <label>X</label>
+    <input type="text" ng-model="map.x">
+
+    <label>Y</label>
+    <input type="text" ng-model="map.y">
 
     <label>Map Type:</label>
     <select ng-options="e for e in envs" ng-model="map.env"></select>

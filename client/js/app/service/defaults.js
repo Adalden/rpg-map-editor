@@ -24,6 +24,8 @@ angular.module('editor').factory('defaults',
       // map
       mapWidth: 15,
       mapHeight: 15,
+      mapX: 0,
+      mapY: 0,
       mapName: 'untitled map',
       mapEnv: 'normal',
       mapEnvs: ['normal', 'rainy', 'cloudy', 'dark'],

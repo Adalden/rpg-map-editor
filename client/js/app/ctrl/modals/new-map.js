@@ -25,6 +25,8 @@ angular.module('editor').controller('newMapCtrl',
       map.title = name;
       map.width = width;
       map.height = height;
+      map.x = 0;
+      map.y = 0;
       map.env = env;
 
       tools.backgroundTile = tile;
