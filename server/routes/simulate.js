@@ -1,6 +1,7 @@
 /* jshint node:true, strict:false */
 var request = require('request'),
-    gameUrl = require('config').gameUrl;
+    gameUrl = require('config').gameUrl,
+      token = require('config').token;
 
 module.exports = function (app) {
   app.post('/sendMap', sendMap);
@@ -10,7 +11,7 @@ function sendMap(req, res) {
   var map = req.body;
 
   request({
-    url: gameUrl,
+    url: gameUrl + token,
     method: 'POST',
     json: map
   }, function (err, resp, body) {

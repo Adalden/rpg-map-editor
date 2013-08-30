@@ -8,5 +8,6 @@ module.exports = {
       users: 'rpg_users'
     }
   },
-  gameUrl: 'http://localhost:4000/map'
+  gameUrl: 'http://localhost:4000/uploadMap/',
+  token: '12345'
 };
