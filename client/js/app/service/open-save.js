@@ -1,6 +1,6 @@
 /* global angular, console */
 angular.module('editor').factory('openSave',
-  function ($http, map) {
+  function ($http, map, user) {
     'use strict';
 
     function getMaps(cb) {
@@ -28,6 +28,7 @@ angular.module('editor').factory('openSave',
     function createMap(cb) {
       var obj = {
         title: map.title,
+        author: user.data.user,
         width: map.width,
         height: map.height,
         data: map.data,
@@ -49,6 +50,7 @@ angular.module('editor').factory('openSave',
       var obj = {
         _id: map._id,
         title: map.title,
+        author: user.data.user,
         width: map.width,
         height: map.height,
         data: map.data,
