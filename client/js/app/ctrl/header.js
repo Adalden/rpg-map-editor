@@ -24,6 +24,7 @@ angular.module('editor').controller('headerCtrl',
     }
 
     $scope.simulateMap = function () {
+      map.author = user.data.user;
       $http.post('/sendMap', { map: map }).then(
         function (resp) {
           console.log(resp.data);

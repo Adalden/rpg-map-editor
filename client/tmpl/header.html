@@ -10,7 +10,7 @@
           </li>
         </ul>
       </li>
-      <li><a ng-click="simulateMap()">Simulate Map</a></li>
+      <li><a ng-show="user.isLoggedIn" ng-click="simulateMap()">Simulate Map</a></li>
     </ul>
     <ul class="nav pull-right">
       <li ng-show="!user.isLoggedIn" ng-click="goToState('index.login')"><a>Login</a></li>
